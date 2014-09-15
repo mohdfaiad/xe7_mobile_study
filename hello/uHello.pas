@@ -36,7 +36,7 @@ type
     lstSetting: TListBox;
     ListBoxItem1: TListBoxItem;
     Switch1: TSwitch;
-    itemWifi: TListBoxItem;
+    ListBoxItemWifiSetting: TListBoxItem;
     ListBoxItem3: TListBoxItem;
     ListBoxGroupFooter1: TListBoxGroupFooter;
     ListBoxItem4: TListBoxItem;
@@ -48,16 +48,20 @@ type
     Button1: TButton;
     ChangeTabActionSetting: TChangeTabAction;
     ListBoxWifi: TListBox;
-    ListBoxItem2: TListBoxItem;
+    ListBoxItemWifi: TListBoxItem;
     SwitchWifi: TSwitch;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
     procedure btnHelloClick(Sender: TObject);
-    procedure itemWifiClick(Sender: TObject);
+    procedure ListBoxItemWifiSettingClick(Sender: TObject);
     procedure SwitchWifiSwitch(Sender: TObject);
+    procedure ChangeTabActionSettingUpdate(Sender: TObject);
   private
     { Private declarations }
+    WifiName: string;
+    WifiCount: integer;
+    procedure WifiListItemClick(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -71,6 +75,8 @@ implementation
 {$R *.iPhone4in.fmx IOS}
 {$R *.LgXhdpiPh.fmx ANDROID}
 
+uses System.Math, CodeSiteLogging;
+
 // 2014.9.13.
 // 点击按钮，显示hello
 procedure TTabbedForm.btnHelloClick(Sender: TObject);
@@ -79,6 +85,11 @@ begin
 end;
 
 // 2014.9.14.
+procedure TTabbedForm.ChangeTabActionSettingUpdate(Sender: TObject);
+begin
+  ListBoxItemWifiSetting.ItemData.Detail := WifiName;
+end;
+
 procedure TTabbedForm.FormCreate(Sender: TObject);
 begin
   { This defines the default active tab at runtime }
@@ -117,37 +128,91 @@ begin
 end;
 
 // 2014.9.14.
-procedure TTabbedForm.itemWifiClick(Sender: TObject);
+procedure TTabbedForm.ListBoxItemWifiSettingClick(Sender: TObject);
 begin
   ChangeTabActionWifi.ExecuteTarget(self);
+
+  codesite.send('listboxwifi component count', ListBoxWifi.ComponentCount);
+end;
+
+// 2013.9.14.
+// wifi listitem点击事件处理
+procedure TTabbedForm.WifiListItemClick(Sender: TObject);
+var
+  ListBoxItem: TListBoxItem;
+  lbMark: Boolean;
+begin
+  WifiName := (Sender as TListBoxItem).Text;
+
+  // 是否已经存在选中的wifi item , 存在则直接修改wifi item text
+  if (ListBoxWifi.FindComponent('listboxitem_wifi_select')) <> nil then
+    (ListBoxWifi.FindComponent('listboxitem_wifi_select') as TListBoxItem).Text
+      := WifiName
+    // 没有使用过，生成wifi item for select
+  else
+  begin
+    ListBoxItem := TListBoxItem.Create(ListBoxWifi);
+    ListBoxItem.Text := WifiName;
+    ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(2);
+    ListBoxItem.Height := 44;
+    ListBoxItem.StyleLookup := 'listboxitemrightdetail';
+    ListBoxItem.Name := 'listboxitem_wifi_select';
+
+    ListBoxWifi.InsertObject(1, ListBoxItem);
+  end;
 end;
 
 // 2014.9.15.
+// wifi switch
 procedure TTabbedForm.SwitchWifiSwitch(Sender: TObject);
 var
+  ListBoxGroupHeader: TListBoxGroupHeader;
   ListBoxItem: TListBoxItem;
   i: integer;
 begin
   // true
   if SwitchWifi.IsChecked then
   begin
-    ListBoxItem := TListBoxItem.Create(ListBoxWifi);
-    ListBoxItem.Text := '无线网名称';
-    ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(2);
-    ListBoxItem.Height := 44;
-    ListBoxItem.StyleLookup := 'listboxitemrightdetail';
 
-    ListBoxWifi.AddObject(ListBoxItem);
+    ListBoxGroupHeader := TListBoxGroupHeader.Create(ListBoxWifi);
+    ListBoxGroupHeader.Text := '选取网络';
+    ListBoxGroupHeader.Name := 'listboxgroupheader_wifi';
+    ListBoxWifi.AddObject(ListBoxGroupHeader);
+
+    WifiCount := System.Math.RandomRange(1, 10);
+    // add random wifi info listitem
+    for i := 1 to WifiCount do
+    begin
+      ListBoxItem := TListBoxItem.Create(ListBoxWifi);
+      ListBoxItem.Text := 'wifi_' +
+        IntToStr(System.Math.RandomRange(100, 1000));
+      ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(2);
+      ListBoxItem.Height := 44;
+      ListBoxItem.StyleLookup := 'listboxitemrightdetail';
+      ListBoxItem.Name := 'listboxitem_wifi_' + IntToStr(i);
+
+      // 挂钩listitem点击事件
+      ListBoxItem.OnClick := WifiListItemClick;
+
+      ListBoxWifi.AddObject(ListBoxItem);
+    end;
   end
   else
   // false
+  // 删除所有wifi相关的listitem
   begin
-    for i := 0 to ListBoxWifi.ComponentCount - 1 do
+    (ListBoxWifi.FindComponent('listboxgroupheader_wifi')
+      as TListBoxGroupHeader).Free;
+
+    for i := 1 to WifiCount do
     begin
-      if ListBoxWifi.Components[i] is TListBoxItem then
-        if (ListBoxWifi.Components[i] as TListBoxItem).Text = '无线网名称' then
-          ListBoxWifi.RemoveObject((ListBoxWifi.Components[i] as TListBoxItem));
+      (ListBoxWifi.FindComponent('listboxitem_wifi_' + IntToStr(i))
+        as TListBoxItem).Free;
     end;
+
+    (ListBoxWifi.FindComponent('listboxitem_wifi_select') as TListBoxItem).Free;
+
+    codesite.send('listboxwifi component count', ListBoxWifi.ComponentCount);
 
   end;
 end;
