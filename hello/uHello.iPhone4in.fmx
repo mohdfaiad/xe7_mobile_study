@@ -43,8 +43,6 @@ inherited TabbedForm_iPhone4in: TTabbedForm_iPhone4in
               Size.Width = 320.000000000000000000
               inherited Switch1: TSwitch
                 Position.X = 265.000000000000000000
-                Position.Y = 4.000000000000000000
-                Size.Height = 35.000000000000000000
               end
             end
             inherited ListBoxItem3: TListBoxItem
@@ -74,29 +72,17 @@ inherited TabbedForm_iPhone4in: TTabbedForm_iPhone4in
               Size.Height = 44.000000000000000000
             end
           end
-          inherited ListBox1: TListBox
+          inherited ListBoxWifi: TListBox
             Size.Width = 320.000000000000000000
             Size.Height = 406.000000000000000000
             inherited ListBoxItem2: TListBoxItem
               Size.Width = 320.000000000000000000
-              inherited Switch2: TSwitch
+              inherited SwitchWifi: TSwitch
                 Position.X = 265.000000000000000000
                 Position.Y = 4.000000000000000000
                 Size.Width = 55.000000000000000000
                 Size.Height = 35.000000000000000000
               end
-            end
-            inherited ListBoxItem6: TListBoxItem
-              Size.Width = 320.000000000000000000
-            end
-            inherited ListBoxGroupHeader1: TListBoxGroupHeader
-              Size.Width = 320.000000000000000000
-              Size.Height = 22.000000000000000000
-              Size.PlatformDefault = False
-            end
-            inherited ListBoxItem7: TListBoxItem
-              Position.Y = 110.000000000000000000
-              Size.Width = 320.000000000000000000
             end
           end
         end

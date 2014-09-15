@@ -99,28 +99,15 @@ inherited TabbedForm_LgXhdpiPh: TTabbedForm_LgXhdpiPh
               Size.Height = 48.000000000000000000
             end
           end
-          inherited ListBox1: TListBox
+          inherited ListBoxWifi: TListBox
             Size.Width = 450.000000000000000000
             Size.Height = 549.000000000000000000
             inherited ListBoxItem2: TListBoxItem
               Size.Width = 450.000000000000000000
-              inherited Switch2: TSwitch
+              inherited SwitchWifi: TSwitch
                 Position.X = 374.000000000000000000
-                Position.Y = 9.000000000000000000
                 Size.Width = 76.000000000000000000
-                Size.Height = 26.000000000000000000
               end
-            end
-            inherited ListBoxItem6: TListBoxItem
-              Size.Width = 450.000000000000000000
-            end
-            inherited ListBoxGroupHeader1: TListBoxGroupHeader
-              Size.Width = 450.000000000000000000
-              Size.Height = 30.000000000000000000
-              Size.PlatformDefault = False
-            end
-            inherited ListBoxItem7: TListBoxItem
-              Position.Y = 95.000000000000000000
             end
           end
         end
