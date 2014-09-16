@@ -1,3 +1,4 @@
+2014.9.16. create develop branch for git
 2014.9.15. begin do wallpaper and brightness setting simulation
 2014.9.15. wifi setting simulation almost done
 2014.9.15. re-make git, function wifi setting simulation still under work
