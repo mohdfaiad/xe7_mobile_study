@@ -9,7 +9,7 @@ uses
   FMX.StdCtrls, FMX.Gestures, FMX.ExtCtrls, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   FMX.ListView.Types, FMX.ListView, FMX.ListBox, FMX.Layouts, System.Actions,
-  FMX.ActnList;
+  FMX.ActnList, FMX.Objects;
 
 type
   TTabbedForm = class(TForm)
@@ -50,7 +50,7 @@ type
     ListBoxWifi: TListBox;
     ListBoxItemWifi: TListBoxItem;
     SwitchWifi: TSwitch;
-    TabItem5: TTabItem;
+    tabWallpaper: TTabItem;
     ToolBar3: TToolBar;
     Label3: TLabel;
     Button2: TButton;
@@ -63,6 +63,10 @@ type
     ListBoxItem8: TListBoxItem;
     TrackBar2: TTrackBar;
     Switch2: TSwitch;
+    Image1: TImage;
+    Image2: TImage;
+    ChangeTabActionWallpaper: TChangeTabAction;
+    GridLayout1: TGridLayout;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -70,6 +74,7 @@ type
     procedure ListBoxItemWifiSettingClick(Sender: TObject);
     procedure SwitchWifiSwitch(Sender: TObject);
     procedure ChangeTabActionSettingUpdate(Sender: TObject);
+    procedure ListBoxItem5Click(Sender: TObject);
   private
     { Private declarations }
     WifiName: string;
@@ -144,8 +149,12 @@ end;
 procedure TTabbedForm.ListBoxItemWifiSettingClick(Sender: TObject);
 begin
   ChangeTabActionWifi.ExecuteTarget(self);
+end;
 
-  codesite.send('listboxwifi component count', ListBoxWifi.ComponentCount);
+// 2014.9.16.
+procedure TTabbedForm.ListBoxItem5Click(Sender: TObject);
+begin
+  ChangeTabActionWallpaper.ExecuteTarget(self);
 end;
 
 // 2013.9.14.
