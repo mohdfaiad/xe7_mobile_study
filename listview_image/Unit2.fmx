@@ -1,0 +1,110 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 543
+  ClientWidth = 382
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 382.000000000000000000
+    Size.Height = 543.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 68.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'TabItem1'
+      object ListBox1: TListBox
+        Align = Client
+        Size.Width = 382.000000000000000000
+        Size.Height = 519.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        object ListBoxItem1: TListBoxItem
+          ItemData.Accessory = aMore
+          TabOrder = 0
+          Text = 'ListBoxItem1'
+          OnClick = ListBoxItem1Click
+        end
+        object ListBoxItem2: TListBoxItem
+          Position.Y = 19.000000000000000000
+          Size.Width = 378.000000000000000000
+          Size.Height = 302.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object GridLayout1: TGridLayout
+            Align = Client
+            ItemHeight = 300.000000000000000000
+            ItemWidth = 150.000000000000000000
+            Orientation = Horizontal
+            Size.Width = 378.000000000000000000
+            Size.Height = 302.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object Image1: TImage
+              MultiResBitmap = <
+                item
+                end>
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 10.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Position.X = 20.000000000000000000
+              Position.Y = 10.000000000000000000
+              Size.Width = 130.000000000000000000
+              Size.Height = 280.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Image2: TImage
+              MultiResBitmap = <
+                item
+                end>
+              Margins.Left = 20.000000000000000000
+              Margins.Top = 10.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Position.X = 170.000000000000000000
+              Position.Y = 10.000000000000000000
+              Size.Width = 130.000000000000000000
+              Size.Height = 280.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+        end
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 70.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'TabItem2'
+    end
+  end
+  object ActionList1: TActionList
+    Left = 304
+    Top = 440
+    object TakePhotoFromLibraryAction1: TTakePhotoFromLibraryAction
+      Category = 'Media Library'
+      OnDidFinishTaking = TakePhotoFromLibraryAction1DidFinishTaking
+    end
+  end
+end

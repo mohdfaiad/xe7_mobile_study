@@ -1,0 +1,34 @@
+inherited Form2_iPhone4in: TForm2_iPhone4in
+  ClientHeight = 548
+  ClientWidth = 320
+  DesignerMasterStyle = 0
+  inherited TabControl1: TTabControl
+    FullSize = True
+    Size.Width = 320.000000000000000000
+    Size.Height = 548.000000000000000000
+    TabHeight = 49.000000000000000000
+    inherited TabItem1: TTabItem
+      Size.Width = 160.000000000000000000
+      Size.Height = 49.000000000000000000
+      inherited ListBox1: TListBox
+        Size.Width = 320.000000000000000000
+        Size.Height = 499.000000000000000000
+        inherited ListBoxItem1: TListBoxItem
+          Text = #36873#25321#22270#29255
+        end
+        inherited ListBoxItem2: TListBoxItem
+          Position.Y = 44.000000000000000000
+          inherited GridLayout1: TGridLayout
+            inherited Image1: TImage
+              Margins.Right = 20.000000000000000000
+            end
+          end
+        end
+      end
+    end
+    inherited TabItem2: TTabItem
+      Size.Width = 160.000000000000000000
+      Size.Height = 49.000000000000000000
+    end
+  end
+end
