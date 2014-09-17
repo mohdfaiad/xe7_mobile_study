@@ -176,7 +176,6 @@ end;
 procedure TTabbedForm.WifiListItemClick(Sender: TObject);
 var
   ListBoxItem: TListBoxItem;
-  lbMark: Boolean;
 begin
   WifiName := (Sender as TListBoxItem).Text;
 
@@ -263,7 +262,7 @@ end;
 procedure TTabbedForm.TakePhotoFromLibraryAction1DidFinishTaking
   (Image: TBitmap);
 begin
-  imageWallpaper1.Bitmap.assign(Image);
+  imageWallpaper1.MultiResBitmap.Items[0].Bitmap.Assign(image);
 end;
 
 end.
