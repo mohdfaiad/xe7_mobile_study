@@ -9,7 +9,7 @@ uses
   FMX.StdCtrls, FMX.Gestures, FMX.ExtCtrls, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
   FMX.ListView.Types, FMX.ListView, FMX.ListBox, FMX.Layouts, System.Actions,
-  FMX.ActnList, FMX.Objects;
+  FMX.ActnList, FMX.Objects, FMX.StdActns, FMX.MediaLibrary.Actions;
 
 type
   TTabbedForm = class(TForm)
@@ -59,7 +59,7 @@ type
     ListBoxItem2: TListBoxItem;
     ListBoxItem6: TListBoxItem;
     ListBoxGroupHeader2: TListBoxGroupHeader;
-    ListBoxItem7: TListBoxItem;
+    ListBoxItemTakePhoto: TListBoxItem;
     ListBoxItem8: TListBoxItem;
     TrackBar2: TTrackBar;
     Switch2: TSwitch;
@@ -67,6 +67,10 @@ type
     Image2: TImage;
     ChangeTabActionWallpaper: TChangeTabAction;
     GridLayout1: TGridLayout;
+    imageWallpaper1: TImage;
+    Image4: TImage;
+    TakePhotoFromLibraryAction1: TTakePhotoFromLibraryAction;
+    TakePhotoFromCameraAction1: TTakePhotoFromCameraAction;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -75,10 +79,14 @@ type
     procedure SwitchWifiSwitch(Sender: TObject);
     procedure ChangeTabActionSettingUpdate(Sender: TObject);
     procedure ListBoxItem5Click(Sender: TObject);
+    procedure ListBoxItemTakePhotoClick(Sender: TObject);
+    procedure TakePhotoFromLibraryAction1DidFinishTaking(Image: TBitmap);
+    procedure imageWallpaper1Click(Sender: TObject);
   private
     { Private declarations }
     WifiName: string;
     WifiCount: integer;
+
     procedure WifiListItemClick(Sender: TObject);
   public
     { Public declarations }
@@ -92,8 +100,9 @@ implementation
 {$R *.fmx}
 {$R *.iPhone4in.fmx IOS}
 {$R *.LgXhdpiPh.fmx ANDROID}
+{$R *.NmXhdpiPh.fmx ANDROID}
 
-uses System.Math, CodeSiteLogging;
+uses System.Math;
 
 // 2014.9.13.
 // µã»÷°´Å¥£¬ÏÔÊ¾hello
@@ -143,6 +152,11 @@ begin
       end;
   end;
 {$ENDIF}
+end;
+
+procedure TTabbedForm.imageWallpaper1Click(Sender: TObject);
+begin
+
 end;
 
 // 2014.9.14.
@@ -234,9 +248,22 @@ begin
 
     (ListBoxWifi.FindComponent('listboxitem_wifi_select') as TListBoxItem).Free;
 
-    codesite.send('listboxwifi component count', ListBoxWifi.ComponentCount);
-
   end;
+end;
+
+//call action take photo from library
+//2014.9.17.
+procedure TTabbedForm.ListBoxItemTakePhotoClick(Sender: TObject);
+begin
+  TakePhotoFromLibraryAction1.ExecuteTarget(Sender);
+end;
+
+// set image from action take from photo library
+// 2014.9.17.
+procedure TTabbedForm.TakePhotoFromLibraryAction1DidFinishTaking
+  (Image: TBitmap);
+begin
+  imageWallpaper1.Bitmap.assign(Image);
 end;
 
 end.

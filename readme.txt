@@ -1,3 +1,4 @@
+2014.9.17. wallpaper setting simulation alomost done, some bugs exists
 2014.9.16. create develop branch for git
 2014.9.15. begin do wallpaper and brightness setting simulation
 2014.9.15. wifi setting simulation almost done
